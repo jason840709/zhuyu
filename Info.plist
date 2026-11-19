@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>逐語</string>
+	<key>CFBundleExecutable</key>
+	<string>Zhuyu</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>app.zhuyu.mac</string>
+	<key>CFBundleName</key>
+	<string>逐語</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.7.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.productivity</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>26.0</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2026 逐語 contributors</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>逐語會將你選擇的麥克風音訊傳給所設定的語音辨識服務，產生雙語逐字稿。</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSRemovableVolumesUsageDescription</key>
+	<string>逐語需要讀寫 App 旁的 Data 資料夾，以保存與讀取雙語逐字稿歷史。</string>
+	<key>NSScreenCaptureUsageDescription</key>
+	<string>逐語擷取電腦播放的音訊，傳給你選擇的辨識服務；不保存螢幕畫面。</string>
+</dict>
+</plist>

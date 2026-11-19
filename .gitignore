@@ -1,0 +1,4 @@
+build/
+Data/
+.DS_Store
+*.xcuserstate
