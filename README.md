@@ -1,83 +1,82 @@
-# 逐語 Zhuyu
+<p align="center">
+  <img src="Assets/AppIcon.png" width="120" height="120" alt="逐語的紫色麥克風圖示">
+</p>
 
-逐語是 Mac 上的即時雙語逐字稿 App。左右兩欄各選一種語言（繁體中文、英文、日文），有人講話時，原話出現在它那一側，譯文出現在另一側。適合上課、演講、會議與線上影片。
+<h1 align="center">逐語 Zhuyu</h1>
 
-- **自備金鑰**：語音辨識可用 OpenAI 或 Gemini，翻譯可用 OpenAI、Gemini 或 Claude。不需要另外註冊帳號或訂閱。
-- **App 自己斷句**：App 會自動估計環境底噪，講者停頓就換下一句。沒人講話時不送出聲音，安靜的時間不計辨識費。
-- **整句潤飾**：每句講完後，翻譯會去掉結巴和口頭禪，譯成通順的書面句，並參考前三句。中文一律用台灣用語。
-- **情境摘要**：App 會用一句話描述場合和目前的話題，再挑出最多 12 個容易聽錯的術語，同時提示語音辨識和翻譯。整理次數有上限，一小時的課約多 0.004 美元。
-- **本機暫譯**：講話當下先在這台 Mac 上產生灰色暫譯，句子講完再換成正式譯文。暫譯引擎可以替換，見下方說明。
+<p align="center">
+  Mac 即時雙語逐字稿與翻譯<br>
+  Real-time bilingual transcripts and translation for macOS
+</p>
 
-> 系統需求：Apple Silicon Mac、macOS 26 以上。從原始碼建置需要含 macOS 26 或更新 SDK 的 Xcode 或 Command Line Tools。
+<p align="center">
+  <a href="https://github.com/jason840709/zhuyu/releases/latest"><strong>下載 Mac 版 · Download for Mac</strong></a>
+  · <a href="#english">English</a>
+</p>
 
-## 快速開始
+在 Mac 上看外語影片、聽課或開會時，逐語把聽到的話和翻譯並排顯示。你可以用麥克風收現場的聲音，也可以直接收 Mac 正在播放的音訊。
 
-```bash
-bash build.sh
-```
+<p align="center">
+  <img src="docs/zhuyu-preview.png" width="960" alt="逐語示範畫面，左欄英文、右欄繁體中文，同列顯示原話與譯文">
+</p>
 
-建置好的 App 在 `build/逐語.app`，可以直接打開，或搬到「應用程式」資料夾。
+## 逐語怎麼處理一段對話
 
-1. 打開「設定」，選服務商，貼上 API 金鑰後按「儲存」。
-2. 分別選擇「語音辨識」和「翻譯與詞彙」要用哪一家；兩者可以交叉搭配。
-3. 在逐字稿兩欄頂端選好語言，底部選收音來源（麥克風或電腦播放的聲音），按「開始辨識」（⌘R）。
+- **兩欄各自固定一種語言。** 左邊選英文、右邊選繁體中文時，講中文的原話放右邊，英文譯文放左邊。對方換講英文時，原話自動放到左邊。繁體中文、英文和日文可以配對。
+- **說話時先看到原話和暫譯。** 開啟本機暫譯後，講話途中就能看到灰色譯文。換句後，所選的雲端服務會參考前文產生正式譯文。暫譯可選 Apple 系統翻譯、本機模型或關閉。
+- **專有名詞會跟著話題累積。** 逐語會從對話找出語境與術語，讓後續翻譯參考，並在支援的辨識模型上提供詞彙提示。「語意環境」可查看學到的詞與上下文校正。
+- **逐句保留時間與譯文。** 原文與譯文一起保留時間，方便回看。歷史對話可搜尋、重新命名，並匯出 Markdown 或純文字。
 
-完整操作見 [docs/使用說明.md](docs/使用說明.md)，費用估算見 [docs/模型與費率.md](docs/模型與費率.md)。
+## 下載與開始使用
 
-## 本機暫譯引擎（可替換）
+需要 **Apple Silicon Mac（M 系列）與 macOS 26 以上**。逐語採用自備 API 金鑰，服務商依你的帳戶用量計費。
 
-灰色暫譯只是為了讓你講話時就看得到大意，正式譯文一定來自你選的雲端翻譯服務，所以這個引擎可以換成任何你喜歡的模型。在「設定 → 本機暫譯」可以選：
+1. 從 [最新 Release](https://github.com/jason840709/zhuyu/releases/latest) 下載 arm64 的 ZIP，解壓縮後打開 `Zhuyu.app`（逐語）。
+2. 在「設定」儲存金鑰，選擇辨識和翻譯服務。辨識可用 **OpenAI、Gemini**，翻譯可用 **OpenAI、Gemini、Claude**。
+3. 兩欄各選一種語言，選「麥克風」或「電腦播放聲音」，按 **⌘R** 開始。
 
-| 選項 | 說明 |
+目前的下載版使用 ad-hoc 簽章，尚未經 Apple 公證。macOS 若在首次開啟時顯示未公證提示，可依 [Apple 的開啟說明](https://support.apple.com/zh-tw/102445) 處理。使用系統收音時，macOS 會另外詢問螢幕與系統音訊錄製權限。
+
+[完整使用說明](docs/使用說明.md) · [模型與費率](docs/模型與費率.md)
+
+## 本機暫譯
+
+在「設定 → 本機暫譯」選一個引擎。
+
+| 引擎 | 設定方式 |
 | --- | --- |
-| 本機模型（預設） | 連到這台 Mac 上任何 OpenAI 相容的伺服器，例如 [Ollama](https://ollama.com)、LM Studio、llama.cpp server。預設模型是 Google 開放權重的 [TranslateGemma](https://ollama.com/library/translategemma) 4B。 |
-| Apple 系統翻譯 | macOS 內建的離線翻譯，要先在「系統設定 → 一般 → 語言與地區 → 翻譯語言」下載語言包。 |
-| 不使用 | 不產生暫譯，句子講完才出現正式譯文。 |
+| 本機模型（預設） | 連接本機的 OpenAI 相容伺服器，例如 Ollama 或 LM Studio。Ollama 可用 `ollama pull translategemma:4b` 下載預設模型。 |
+| Apple 系統翻譯 | 在 macOS 下載對應的翻譯語言後使用。 |
+| 關閉 | 顯示原文與定稿譯文，省去本機模型的運算。 |
 
-用預設模型的話，裝好 Ollama 後執行：
+本機暫譯是選用功能。預設 TranslateGemma 模型需另行下載，速度與品質尚未實測。[替換本機暫譯引擎](docs/替換本機暫譯引擎.md)
 
-```bash
-ollama pull translategemma:4b
-```
+## 資料與隱私
 
-> 預設模型是依網路上的評價選的，作者沒有實際測過它的速度和品質。速度太慢或譯文不理想時，可以在設定裡改填其他模型名稱。想自己寫一個新引擎也可以，見 [docs/替換本機暫譯引擎.md](docs/替換本機暫譯引擎.md)。
+音訊送往你選的語音辨識服務，翻譯及語境分析所需的文字送往你選的翻譯服務。本機暫譯只連這台 Mac 上的伺服器或使用系統翻譯。App 不保存錄音。
 
-為了保護隱私，本機模型只接受這台 Mac 的位址（`127.0.0.1`、`localhost`）。暫譯的文字不會送出這台電腦。
+歷史、設定與金鑰存放在 `~/Library/Application Support/app.zhuyu.mac/`，其中 `Private/` 內的金鑰以明文儲存。開啟無痕模式可停用逐字稿與詞彙紀錄的本機保存。
 
-## 隱私與資料
+## 從原始碼建置
 
-- 聲音只送給你選的語音辨識服務，句子文字只送給你選的翻譯服務。App 不保存錄音。
-- 歷史紀錄和設定存放在 `~/Library/Application Support/app.zhuyu.mac/`。金鑰是其中 `Private/` 目錄內的**明文檔案**。
-- 開啟「無痕模式」時不保存逐字稿。
-
-## 開發
+需要包含 macOS 26 或更新 SDK 的 Xcode 或 Command Line Tools。
 
 ```bash
-bash verify.sh            # 離線核心測試，不需要網路或金鑰
-bash build.sh             # 建置 build/逐語.app
+bash verify.sh    # 離線核心測試
+bash build.sh     # 產生 build/逐語.app
 ```
 
-程式結構：
-
-| 檔案 | 負責 |
-| --- | --- |
-| `Sources/UtteranceSegmenter.swift` | 斷句：估計底噪、判斷開口與停頓、只在講話時送出聲音 |
-| `Sources/SpeechPipeline.swift` | 連接 OpenAI／Gemini 即時語音辨識 |
-| `Sources/TranslationClient.swift` | 整句翻譯與潤飾（OpenAI、Gemini、Claude） |
-| `Sources/SemanticEnvironment.swift` | 情境摘要、罕見詞、誤聽修正與用量上限 |
-| `Sources/LocalDraftTranslator.swift` | 可替換的本機暫譯引擎 |
-| `Sources/AppModel.swift`、`Views.swift` | App 狀態與 SwiftUI 介面 |
-
-## 授權
-
-MIT License，見 [LICENSE](LICENSE)。各家 API、Ollama、TranslateGemma 與 Apple Translation 依各自的條款使用；本專案不附帶任何模型權重。
-
----
+原始碼以 [MIT 授權](LICENSE) 發布。API、本機模型與 Apple 系統翻譯依各自條款提供。下載版不附模型權重。
 
 ## English
 
-Zhuyu is a real-time bilingual transcript app for macOS (Apple Silicon, macOS 26+). Bring your own API key: speech recognition uses OpenAI or Gemini, and translation uses OpenAI, Gemini or Claude. The app detects pauses on its own and sends audio only while someone is speaking. Each finished sentence is polished into a written translation, and a running one-sentence scene summary guides both recognition and translation.
+**Zhuyu** is a macOS app for following bilingual conversations, lectures, meetings and videos. Set one language per column. When the speaker switches languages, the transcript moves to the matching column and the translation appears alongside it. Choose any pair of Traditional Chinese, English and Japanese.
 
-While someone is speaking, a gray draft translation is produced on your Mac. The draft engine is replaceable: by default it calls any OpenAI-compatible local server (Ollama, LM Studio, llama.cpp) running `translategemma:4b`. You can switch to Apple's on-device Translation framework or turn drafts off. To add your own engine, see [docs/替換本機暫譯引擎.md](docs/替換本機暫譯引擎.md). The default model has not been benchmarked by the author.
+- Capture your microphone or the audio playing on your Mac.
+- Read on-device draft translations as someone speaks, then get a cloud translation after each utterance. Use Apple Translation, an OpenAI-compatible server on your Mac or turn drafts off.
+- Carry the conversation topic and technical terms forward into later translations and use vocabulary hints with supported speech models.
+- Search past conversations and export timestamps, transcripts and translations as Markdown or plain text.
 
-Build with `bash build.sh` and run the offline tests with `bash verify.sh`. MIT licensed.
+[Download for Mac](https://github.com/jason840709/zhuyu/releases/latest) · [Usage guide (Traditional Chinese)](docs/使用說明.md)
+
+**Requirements** — Apple Silicon, macOS 26+, and your own API keys. Use OpenAI or Gemini for transcription and OpenAI, Gemini or Claude for translation. The interface is in Traditional Chinese. The download is ad-hoc signed and has not been notarized. [Apple’s first-launch instructions](https://support.apple.com/en-us/102445)
